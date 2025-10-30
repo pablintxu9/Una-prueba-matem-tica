@@ -1,3 +1,5 @@
+import math
+
 class Punto:
     def __init__(self, x=0, y=0):
         self.x = x
@@ -24,3 +26,89 @@ class Punto:
             return "Cuarto cuadrante"
         # caso por seguridad (no suele alcanzarse)
         return "Desconocido"
+
+    def vector(self, otro):
+        return Punto(otro.x - self.x, otro.y - self.y)
+
+    def distancia(self, otro):
+        dx = otro.x - self.x
+        dy = otro.y - self.y
+        dist = math.sqrt(dx * dx + dy * dy)
+        print(f"Distancia entre {self} y {otro}: {dist}")
+        return dist
+
+
+class Rectangulo:
+    def __init__(self, inicial=None, final=None):
+
+        self.inicial = inicial if inicial is not None else Punto()
+        self.final = final if final is not None else Punto()
+
+    def base(self):
+        b = abs(self.final.x - self.inicial.x)
+        print(f"Base del rectángulo (|x2 - x1|)/ {b}")
+        return b
+
+    def altura(self):
+        h = abs(self.final.y - self.inicial.y)
+        print(f"Altura del rectángulo (|y2 - y1|)/ {h}")
+        return h
+
+    def area(self):
+        a = self.base() * self.altura()
+        print(f"Área del rectángulo: {a}")
+        return a
+
+
+if __name__ == "__main__":
+    # Experimentación
+    A = Punto(2, 3)
+    B = Punto(5, 5)
+    C = Punto(-3, -1)
+    D = Punto(0, 0)
+
+    # Imprimir puntos
+    print("Puntos:")
+    print("A =", A)
+    print("B =", B)
+    print("C =", C)
+    print("D =", D)
+    print()
+
+    # Cuadrantes
+    print("Cuadrantes:")
+    print("A ->", A.cuadrante())
+    print("C ->", C.cuadrante())
+    print("D ->", D.cuadrante())
+    print()
+
+    # Vectores AB y BA
+    print("Vectores:")
+    AB = A.vector(B)
+    BA = B.vector(A)
+    print("Vector AB =", AB)
+    print("Vector BA =", BA)
+    print()
+
+    # Distancias (opcional)
+    print("Distancias:")
+    A.distancia(B)
+    B.distancia(A)
+    print()
+
+    # ¿Cuál de A, B, C está más lejos del origen?
+    distancias_origen = {
+        'A': A.distancia(D),
+        'B': B.distancia(D),
+        'C': C.distancia(D)
+    }
+    mas_lejos = max(distancias_origen, key=distancias_origen.get)
+    print(f"El punto más lejano del origen entre A, B y C es: {mas_lejos}")
+    print()
+
+    # Rectángulo con A y B
+    rect = Rectangulo(A, B)
+    print("Rectángulo formado por A y B:")
+    rect.base()
+    rect.altura()
+    rect.area()
