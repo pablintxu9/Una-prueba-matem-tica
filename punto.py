@@ -24,7 +24,6 @@ class Punto:
             return "Tercer cuadrante"
         if x > 0 and y < 0:
             return "Cuarto cuadrante"
-        # caso por seguridad (no suele alcanzarse)
         return "Desconocido"
 
     def vector(self, otro):
@@ -61,13 +60,11 @@ class Rectangulo:
 
 
 if __name__ == "__main__":
-    # Experimentación
     A = Punto(2, 3)
     B = Punto(5, 5)
     C = Punto(-3, -1)
     D = Punto(0, 0)
 
-    # Imprimir puntos
     print("Puntos:")
     print("A =", A)
     print("B =", B)
@@ -75,14 +72,12 @@ if __name__ == "__main__":
     print("D =", D)
     print()
 
-    # Cuadrantes
     print("Cuadrantes:")
     print("A ->", A.cuadrante())
     print("C ->", C.cuadrante())
     print("D ->", D.cuadrante())
     print()
 
-    # Vectores AB y BA
     print("Vectores:")
     AB = A.vector(B)
     BA = B.vector(A)
@@ -90,13 +85,12 @@ if __name__ == "__main__":
     print("Vector BA =", BA)
     print()
 
-    # Distancias (opcional)
     print("Distancias:")
     A.distancia(B)
     B.distancia(A)
     print()
 
-    # ¿Cuál de A, B, C está más lejos del origen?
+
     distancias_origen = {
         'A': A.distancia(D),
         'B': B.distancia(D),
@@ -106,7 +100,6 @@ if __name__ == "__main__":
     print(f"El punto más lejano del origen entre A, B y C es: {mas_lejos}")
     print()
 
-    # Rectángulo con A y B
     rect = Rectangulo(A, B)
     print("Rectángulo formado por A y B:")
     rect.base()
